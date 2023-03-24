@@ -1,7 +1,7 @@
 import './css/styles.css';
 import Notiflix from 'notiflix';
 import debounce from 'lodash.debounce';
-import { fetchCountries } from './fetchCountries'
+import { fetchCountries, fetchApiSearchQuery } from './fetchCountries'
 
 const DEBOUNCE_DELAY = 300;
 
@@ -14,12 +14,13 @@ const refs = {
 refs.input.addEventListener("input", debounce(selectionCountry), DEBOUNCE_DELAY);
 
 function selectionCountry(e) {
-    e.preventDefault();
-    const inputValue = e.target.value.trim();
-    if (!inputValue) {
-        clearAll();
-        return;
-    }
+  e.preventDefault();
+  const inputValue = e.target.value.trim();
+  if (!inputValue) {
+    clearAll();
+    return;
+  }
+
 
 fetchCountries(inputValue)
  .then(country => {
